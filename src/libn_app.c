@@ -192,7 +192,7 @@ void app_init(void) {
     USB_power(false);
     USB_power(true);
 
-#if defined(TARGET_NANOX)
+#if defined(HAVE_BLE)
     G_io_app.plane_mode = os_setting_get(OS_SETTING_PLANEMODE, NULL, 0);
     BLE_power(0, NULL);
     BLE_power(1, "Nano X");
@@ -252,13 +252,13 @@ void u2f_message_timeout() {
     u2f_message_reply(&G_io_u2f, U2F_CMD_MSG, G_io_apdu_buffer, 2);
 
     // reset apdu state
-    #if defined(TARGET_NANOX)
+    #if defined(TARGET_NANOX) || defined(TARGET_NANOS2)
     G_io_app.apdu_state = APDU_IDLE;
     G_io_app.apdu_length = 0;
     G_io_app.apdu_media = IO_APDU_MEDIA_NONE;
     #else
     G_io_apdu_state = APDU_IDLE;
-#if CX_APILEVEL < 10 
+#if CX_APILEVEL < 10
     G_io_apdu_length = 0;
 #else
     G_io_app.apdu_length = 0;

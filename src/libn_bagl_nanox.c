@@ -25,7 +25,7 @@
 #include "libn_internal.h"
 #include "libn_bagl.h"
 
-#if defined(TARGET_NANOX)
+#if defined(TARGET_NANOX) || defined(TARGET_NANOS2)
 
 #define ACCOUNT_BUF_LEN ( \
     LIBN_ACCOUNT_STRING_BASE_LEN \
